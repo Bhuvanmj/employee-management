@@ -7,9 +7,7 @@ require_once "db.php";
 
 
 // Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+
 
 // Revised query with LEFT JOIN for all tables
 $sql = "
