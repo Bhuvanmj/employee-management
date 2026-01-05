@@ -7,9 +7,6 @@ use Dompdf\Dompdf;
 require_once "db.php";
 
 // Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // Query to fetch all employee data along with department, bank details, and more
 $sql = "
