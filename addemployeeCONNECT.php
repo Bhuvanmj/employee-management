@@ -12,13 +12,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $bank_name       = $_POST["bank_name"];
     $account_number  = $_POST["account_number"];
     $department_name = $_POST["department_name"];
-    $job_role_id     = $_POST["job_role_id"];
+    $job_role_id     = $_POST["job_role_id"] ?? null;
 
     try {
         // start transaction
         $conn->beginTransaction();
 
-        // 1. insert employee
+        // 1. insert employee (AUTO EmployeeID)
         $stmt = $conn->prepare("
             INSERT INTO employee 
             (firstname, lastname, gender, birthdate, contactinfo, address)
@@ -38,8 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // 2. insert bank details
         $stmt = $conn->prepare("
-            INSERT INTO bankdetails 
-            (employeeid, bankname, accountnumber)
+            INSERT INTO bankdetails (employeeid, bankname, accountnumber)
             VALUES (?, ?, ?)
         ");
         $stmt->execute([
@@ -80,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         $conn->commit();
-        echo "Employee added successfully.";
+        echo "Employee added successfully";
 
     } catch (Exception $e) {
         $conn->rollBack();
