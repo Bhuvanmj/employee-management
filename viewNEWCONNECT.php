@@ -3,13 +3,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Database connection
-$host     = getenv("DB_HOST");
-$username = getenv("DB_USER");
-$password = getenv("DB_PASS");
-$database = getenv("DB_NAME");
+require_once "db.php";
 
-
-$conn = new mysqli($host, $username, $password, $database);
 
 // Check connection
 if ($conn->connect_error) {
