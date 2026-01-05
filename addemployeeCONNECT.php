@@ -1,9 +1,9 @@
 <?php
 // Database connection
-$servername = "localhost"; // Change this if your database is hosted elsewhere
-$username = "root"; // Your database username
-$password = "navuhb"; // Your database password
-$dbname = "dbmsproject"; // Your database name
+$servername = getenv("DB_HOST");
+$username   = getenv("DB_USER");
+$password   = getenv("DB_PASS");
+$dbname     = getenv("DB_NAME");
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
