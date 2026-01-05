@@ -7,9 +7,7 @@ require_once "db.php";
 
 
 // Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+
 
 // Get the Employee ID from the POST request
 $employee_id = isset($_POST['employee_id']) ? intval($_POST['employee_id']) : 0;
