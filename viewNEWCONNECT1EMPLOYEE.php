@@ -3,10 +3,11 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Database connection
-$host = "localhost";
-$username = "root";
-$password = "navuhb";
-$database = "dbmsproject";
+$host     = getenv("DB_HOST");
+$username = getenv("DB_USER");
+$password = getenv("DB_PASS");
+$database = getenv("DB_NAME");
+
 
 $conn = new mysqli($host, $username, $password, $database);
 
