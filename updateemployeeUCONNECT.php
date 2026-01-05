@@ -1,12 +1,8 @@
 <?php
 // Database connection
-$servername = getenv("DB_HOST");
-$username   = getenv("DB_USER");
-$password   = getenv("DB_PASS");
-$dbname     = getenv("DB_NAME");
 
+require_once "db.php";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
 
 // Check connection
 if ($conn->connect_error) {
