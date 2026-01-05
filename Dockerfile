@@ -1,10 +1,11 @@
 FROM php:8.2-cli
 
-# Install mysqli extension
-RUN docker-php-ext-install mysqli
+# Install PostgreSQL PDO driver
+RUN apt-get update && apt-get install -y libpq-dev \
+    && docker-php-ext-install pdo pdo_pgsql
 
 WORKDIR /app
-
 COPY . .
 
-CMD ["sh", "-c", "php -S 0.0.0.0:$PORT"]
+EXPOSE 10000
+CMD ["php", "-S", "0.0.0.0:10000"]
