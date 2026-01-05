@@ -1,0 +1,132 @@
+
+
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, rgba(0, 123, 255, 0.7), rgba(40, 167, 69, 0.7)), 
+    url('https://source.unsplash.com/1600x900/?office') no-repeat center/cover;
+    background-image: url('emp.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container Styling */
+.container {
+    max-width: 600px;
+    background: transparent;
+    backdrop-filter: blur(55px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInContainer 1s ease-in-out forwards;
+}
+
+/* Header Styling */
+.container h1 {
+    font-size: 2.2rem;
+    color: #4CAF50;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInHeader 1.2s ease-in-out forwards;
+}
+
+/* Form Container Styling */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Label Styling */
+form label {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Input Styling */
+form input[type="text"] {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex: 1;
+}
+
+/* Button Styling */
+form button {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+form button:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+/* View All Button Styling */
+form .view-all-btn {
+    background: #4CAF50;
+}
+
+form .view-all-btn:hover {
+    background: #388E3C;
+}
+
+/* Download Button Styling */
+form .download-btn {
+    background: #4CAF50; /* Unique color */
+}
+
+form .download-btn:hover {
+    background: #388E3C;
+}
+
+/* Animations */
+@keyframes fadeInContainer {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInHeader {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,176 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(120deg, #fdfbfb, #ebedee);
+    background-image: url('backend_3.jpg');
+    background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Container Styling */
+.container {
+    max-width: 800px;
+    background: transparent;
+    backdrop-filter: blur(55px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    padding: 20px;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInContainer 1s ease-in-out forwards;
+}
+
+/* Header Styling */
+header h1 {
+    font-size: 2.5rem;
+    color: #4CAF50;
+    margin-bottom: 10px;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInHeader 1.2s ease-in-out forwards;
+}
+
+header p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInSubHeader 1.4s ease-in-out forwards;
+}
+
+/* Navigation Menu */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-around;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInNav 1.6s ease-in-out forwards;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    background: #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+nav ul li a:hover {
+    background: #0056b3;
+    transform: scale(1.1);
+}
+
+/* Main Content */
+main section {
+    padding: 20px;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInContent 1.8s ease-in-out forwards;
+}
+
+main section h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+main section p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.8;
+}
+
+/* Button Styling (Optional) */
+button {
+    padding: 10px 15px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    background: #4CAF50;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #388E3C;
+}
+
+/* Fade-in animations */
+@keyframes fadeInContainer {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInHeader {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInSubHeader {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInNav {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInContent {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

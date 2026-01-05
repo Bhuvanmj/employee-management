@@ -1,0 +1,138 @@
+/* Body and Background */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to right, rgba(0, 123, 255, 0.7), rgba(40, 167, 69, 0.7)), 
+                url('https://source.unsplash.com/1600x900/?office') no-repeat center/cover;
+    color: #333;
+}
+
+/* Container Styling */
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 30px 40px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 800px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply fade-in effect to form fields */
+input, select, textarea {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: all 0.3s ease, opacity 0.5s ease-in-out;
+    background: #f9f9f9;
+    opacity: 0; /* Initially hidden */
+    animation: fadeIn 1s forwards; /* Apply fade-in animation */
+}
+
+/* Header */
+h1 {
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input, select, textarea {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #f9f9f9;
+}
+
+textarea {
+    resize: none;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    background: #fff;
+}
+
+/* Button Styling */
+button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+    background: linear-gradient(to right, #007bff, #0056b3);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px rgba(0, 123, 255, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 30px;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    button {
+        font-size: 1rem;
+    }
+}

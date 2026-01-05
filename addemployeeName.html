@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+    <link rel="stylesheet" href="addemployeecss.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Add Employee</h1>
+        <form action="addemployeeCONNECT.php" method="POST">
+            <!-- Row 1 -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="employee_id">Employee ID:</label>
+                    <input type="text" id="employee_id" name="employee_id" placeholder="Enter Employee ID" required>
+                </div>
+                <div class="form-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" id="first_name" name="first_name" placeholder="Enter First Name" required>
+                </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" id="last_name" name="last_name" placeholder="Enter Last Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter Phone Number" required>
+                </div>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <textarea id="address" name="address" rows="3" placeholder="Enter Address" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="bank_details_id">Bank Details ID:</label>
+                    <input type="text" id="bank_details_id" name="bank_details_id" placeholder="Enter Bank Details ID" required>
+                </div>
+            </div>
+
+            <!-- Row 5 -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="bank_name">Bank Name:</label>
+                    <input type="text" id="bank_name" name="bank_name" placeholder="Enter Bank Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="account_number">Account Number:</label>
+                    <input type="text" id="account_number" name="account_number" placeholder="Enter Account Number" required>
+                </div>
+            </div>
+
+            <!-- Row 6 -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="department_id">Department ID:</label>
+                    <input type="text" id="department_id" name="department_id" placeholder="Enter Department ID" required>
+                </div>
+                <div class="form-group">
+                    <label for="department_name">Department Name:</label>
+                    <input type="text" id="department_name" name="department_name" placeholder="Enter Department Name" required>
+                </div>
+            </div>
+
+            <!-- Row 7 -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="job_role_id">Job Role ID:</label>
+                    <input type="text" id="job_role_id" name="job_role_id" placeholder="Enter Job Role ID" required>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <button type="submit">Add Employee</button>
+        </form>
+    </div>
+</body>
+</html>

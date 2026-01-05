@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Update Employee</title>
+
+    <link rel="stylesheet" href="updateemployeecss.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+
+            <h1>Update Employee Details</h1>
+
+            <p>Make changes to the employee's information and save updates.</p>
+
+        </div>
+
+        <form action="updateemployeeUCONNECT.php" method="POST">
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="employee_id">Employee ID</label>
+
+                    <input type="text" id="employee_id" name="employee_id" placeholder="Enter Employee ID" required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="first_name">First Name</label>
+
+                    <input type="text" id="first_name" name="first_name" placeholder="Enter First Name" required>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="last_name">Last Name</label>
+
+                    <input type="text" id="last_name" name="last_name" placeholder="Enter Last Name" required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="gender">Gender</label>
+
+                    <select id="gender" name="gender" required>
+
+                        <option value="" disabled selected>Select Gender</option>
+
+                        <option value="Male">Male</option>
+
+                        <option value="Female">Female</option>
+
+                        <option value="Other">Other</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="dob">Date of Birth</label>
+
+                    <input type="date" id="dob" name="dob" required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="phone">Phone Number</label>
+
+                    <input type="tel" id="phone" name="phone" placeholder="Enter Phone Number" required>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="address">Address</label>
+
+                    <textarea id="address" name="address" rows="4" placeholder="Enter Address" required></textarea>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="bank_details_id">Bank Details ID</label>
+
+                    <input type="text" id="bank_details_id" name="bank_details_id" placeholder="Enter Bank Details ID" required>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="bank_name">Bank Name</label>
+
+                    <input type="text" id="bank_name" name="bank_name" placeholder="Enter Bank Name" required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="account_number">Account Number</label>
+
+                    <input type="text" id="account_number" name="account_number" placeholder="Enter Account Number" required>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="department_id">Department ID</label>
+
+                    <input type="text" id="department_id" name="department_id" placeholder="Enter Department ID" required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="department_name">Department Name</label>
+
+                    <input type="text" id="department_name" name="department_name" placeholder="Enter Department Name" required>
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="job_role_id">Job Role ID</label>
+
+                    <input type="text" id="job_role_id" name="job_role_id" placeholder="Enter Job Role ID" required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="job_role_name">Job Role Name</label>
+
+                    <input type="text" id="job_role_name" name="job_role_name" placeholder="Enter Job Role Name" required>
+
+                </div>
+
+            </div>
+
+            <div class="form-footer">
+
+                <button type="submit" class="submit-btn">Update Employee</button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

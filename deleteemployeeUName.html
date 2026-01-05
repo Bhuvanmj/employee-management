@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Employee</title>
+    <link rel="stylesheet" href="deleteemployeecss.css">
+</head>
+<body>
+    <div class="delete-container">
+        <h1>Delete Employee</h1>
+        <p>Enter the necessary IDs below to delete the record.</p>
+        <form action="deleteemployeeCONNECT.php" method="POST">
+            <div class="form-row">
+                <label for="employee_id">Employee ID:</label>
+                <input type="text" id="employee_id" name="employee_id" placeholder="Enter Employee ID" required>
+            </div>
+
+            <div class="form-row">
+                <label for="department_id">Department ID:</label>
+                <input type="text" id="department_id" name="department_id" placeholder="Enter Department ID" required>
+            </div>
+
+            <div class="form-row">
+                <label for="job_role_id">Job Role ID:</label>
+                <input type="text" id="job_role_id" name="job_role_id" placeholder="Enter Job Role ID" required>
+            </div>
+
+            <div class="form-row">
+                <label for="bank_details_id">Bank Details ID:</label>
+                <input type="text" id="bank_details_id" name="bank_details_id" placeholder="Enter Bank Details ID" required>
+            </div>
+
+            <div class="form-row">
+                <label for="confirm_action">Confirm Action:</label>
+                <select id="confirm_action" name="confirm_action" required>
+                    <option value="">-- Select --</option>
+                    <option value="delete">Delete</option>
+                </select>
+            </div>
+
+            <button type="submit" class="delete-btn">Delete Employee</button>
+        </form>
+    </div>
+</body>
+</html>

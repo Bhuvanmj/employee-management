@@ -1,0 +1,99 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Database connection
+$host = "localhost";
+$username = "root";
+$password = "navuhb";
+$database = "dbmsproject";
+
+$conn = new mysqli($host, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Revised query with LEFT JOIN for all tables
+$sql = "
+    SELECT 
+        E.EmployeeID, E.FirstName, E.LastName, E.Gender, E.Birthdate, E.ContactInfo, E.Address,
+        D.DepartmentName, 
+        J.JobRoleName, 
+        S.BasicSalary, S.Allowances, 
+        B.BankName, B.AccountNumber,
+        L.LeaveType, L.LeaveStartDate, L.LeaveEndDate, L.Status
+    FROM 
+        Employee E
+    LEFT JOIN 
+        EmployeeDepartment ED ON E.EmployeeID = ED.EmployeeID
+    LEFT JOIN 
+        Department D ON ED.DepartmentID = D.DepartmentID
+    LEFT JOIN 
+        EmployeeJobRole EJ ON E.EmployeeID = EJ.EmployeeID
+    LEFT JOIN 
+        JobRole J ON EJ.JobRoleID = J.JobRoleID
+    LEFT JOIN 
+        Salary S ON E.EmployeeID = S.EmployeeID
+    LEFT JOIN 
+        BankDetails B ON E.EmployeeID = B.EmployeeID
+    LEFT JOIN 
+        LeaveManagement L ON E.EmployeeID = L.EmployeeID
+";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Displaying all employees with detailed information in a table
+    echo "<h2>All Employee Details:</h2>";
+    echo "<table border='1'>
+            <tr>
+                <th>Employee ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Birthdate</th>
+                <th>Contact Info</th>
+                <th>Address</th>
+                <th>Department</th>
+                <th>Job Role</th>
+                <th>Basic Salary</th>
+                <th>Allowances</th>
+                <th>Bank Name</th>
+                <th>Account Number</th>
+                <th>Leave Type</th>
+                <th>Leave Start Date</th>
+                <th>Leave End Date</th>
+                <th>Leave Status</th>
+            </tr>";
+
+    while ($employee = $result->fetch_assoc()) {
+        echo "<tr>
+                <td>" . $employee['EmployeeID'] . "</td>
+                <td>" . $employee['FirstName'] . "</td>
+                <td>" . $employee['LastName'] . "</td>
+                <td>" . $employee['Gender'] . "</td>
+                <td>" . $employee['Birthdate'] . "</td>
+                <td>" . $employee['ContactInfo'] . "</td>
+                <td>" . $employee['Address'] . "</td>
+                <td>" . $employee['DepartmentName'] . "</td>
+                <td>" . $employee['JobRoleName'] . "</td>
+                <td>" . $employee['BasicSalary'] . "</td>
+                <td>" . $employee['Allowances'] . "</td>
+                <td>" . $employee['BankName'] . "</td>
+                <td>" . $employee['AccountNumber'] . "</td>
+                <td>" . $employee['LeaveType'] . "</td>
+                <td>" . $employee['LeaveStartDate'] . "</td>
+                <td>" . $employee['LeaveEndDate'] . "</td>
+                <td>" . $employee['Status'] . "</td>
+              </tr>";
+    }
+    echo "</table>";
+} else {
+    echo "<p>No employees found.</p>";
+}
+
+// Close connection
+$conn->close();
+?>

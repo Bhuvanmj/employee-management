@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Employee</title>
+    <link rel="stylesheet" href="viewcssforPDF.css">
+</head>
+<body>
+    <div class="container">
+        <h1>View Employee</h1>
+        <div class="form-container">
+            <!-- Form to view specific employee -->
+            <form action="viewNEWCONNECT1EMPLOYEE.php" method="POST">
+                <label for="employee_id">Employee ID:</label>
+                <input type="text" id="employee_id" name="employee_id" placeholder="Enter ID" required>
+                <button type="submit">View Employee</button>
+            </form>
+            
+            <!-- Form to view all employees -->
+            <form action="viewNEWCONNECT.php" method="GET">
+                <button type="submit" class="view-all-btn">View All Employees</button>
+            </form>
+
+            <!-- Button to download employee details as PDF -->
+            <form action="generatePDF.php" method="GET">
+                <button type="submit" class="download-btn">Download Employee Details as PDF</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
