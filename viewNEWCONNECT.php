@@ -2,92 +2,92 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Database connection
 require_once "db.php";
 
+try {
+    $sql = "
+        SELECT 
+            e.employeeid,
+            e.firstname,
+            e.lastname,
+            e.gender,
+            e.birthdate,
+            e.contactinfo,
+            e.address,
+            d.departmentname,
+            j.jobrolename,
+            s.basicsalary,
+            s.allowances,
+            b.bankname,
+            b.accountnumber,
+            l.leavetype,
+            l.leavestartdate,
+            l.leaveenddate,
+            l.status
+        FROM employee e
+        LEFT JOIN employeedepartment ed ON e.employeeid = ed.employeeid
+        LEFT JOIN department d ON ed.departmentid = d.departmentid
+        LEFT JOIN employeejobrole ej ON e.employeeid = ej.employeeid
+        LEFT JOIN jobrole j ON ej.jobroleid = j.jobroleid
+        LEFT JOIN salary s ON e.employeeid = s.employeeid
+        LEFT JOIN bankdetails b ON e.employeeid = b.employeeid
+        LEFT JOIN leavemanagement l ON e.employeeid = l.employeeid
+    ";
 
-// Check connection
+    $stmt = $conn->query($sql);
+    $employees = $stmt->fetchAll();
 
+    if (count($employees) > 0) {
+        echo "<h2>All Employee Details</h2>";
+        echo "<table border='1'>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Gender</th>
+                    <th>Birthdate</th>
+                    <th>Contact Info</th>
+                    <th>Address</th>
+                    <th>Department</th>
+                    <th>Job Role</th>
+                    <th>Basic Salary</th>
+                    <th>Allowances</th>
+                    <th>Bank Name</th>
+                    <th>Account Number</th>
+                    <th>Leave Type</th>
+                    <th>Leave Start</th>
+                    <th>Leave End</th>
+                    <th>Status</th>
+                </tr>";
 
-// Revised query with LEFT JOIN for all tables
-$sql = "
-    SELECT 
-        E.EmployeeID, E.FirstName, E.LastName, E.Gender, E.Birthdate, E.ContactInfo, E.Address,
-        D.DepartmentName, 
-        J.JobRoleName, 
-        S.BasicSalary, S.Allowances, 
-        B.BankName, B.AccountNumber,
-        L.LeaveType, L.LeaveStartDate, L.LeaveEndDate, L.Status
-    FROM 
-        Employee E
-    LEFT JOIN 
-        EmployeeDepartment ED ON E.EmployeeID = ED.EmployeeID
-    LEFT JOIN 
-        Department D ON ED.DepartmentID = D.DepartmentID
-    LEFT JOIN 
-        EmployeeJobRole EJ ON E.EmployeeID = EJ.EmployeeID
-    LEFT JOIN 
-        JobRole J ON EJ.JobRoleID = J.JobRoleID
-    LEFT JOIN 
-        Salary S ON E.EmployeeID = S.EmployeeID
-    LEFT JOIN 
-        BankDetails B ON E.EmployeeID = B.EmployeeID
-    LEFT JOIN 
-        LeaveManagement L ON E.EmployeeID = L.EmployeeID
-";
+        foreach ($employees as $emp) {
+            echo "<tr>
+                    <td>{$emp['employeeid']}</td>
+                    <td>{$emp['firstname']}</td>
+                    <td>{$emp['lastname']}</td>
+                    <td>{$emp['gender']}</td>
+                    <td>{$emp['birthdate']}</td>
+                    <td>{$emp['contactinfo']}</td>
+                    <td>{$emp['address']}</td>
+                    <td>{$emp['departmentname']}</td>
+                    <td>{$emp['jobrolename']}</td>
+                    <td>{$emp['basicsalary']}</td>
+                    <td>{$emp['allowances']}</td>
+                    <td>{$emp['bankname']}</td>
+                    <td>{$emp['accountnumber']}</td>
+                    <td>{$emp['leavetype']}</td>
+                    <td>{$emp['leavestartdate']}</td>
+                    <td>{$emp['leaveenddate']}</td>
+                    <td>{$emp['status']}</td>
+                  </tr>";
+        }
 
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    // Displaying all employees with detailed information in a table
-    echo "<h2>All Employee Details:</h2>";
-    echo "<table border='1'>
-            <tr>
-                <th>Employee ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Gender</th>
-                <th>Birthdate</th>
-                <th>Contact Info</th>
-                <th>Address</th>
-                <th>Department</th>
-                <th>Job Role</th>
-                <th>Basic Salary</th>
-                <th>Allowances</th>
-                <th>Bank Name</th>
-                <th>Account Number</th>
-                <th>Leave Type</th>
-                <th>Leave Start Date</th>
-                <th>Leave End Date</th>
-                <th>Leave Status</th>
-            </tr>";
-
-    while ($employee = $result->fetch_assoc()) {
-        echo "<tr>
-                <td>" . $employee['EmployeeID'] . "</td>
-                <td>" . $employee['FirstName'] . "</td>
-                <td>" . $employee['LastName'] . "</td>
-                <td>" . $employee['Gender'] . "</td>
-                <td>" . $employee['Birthdate'] . "</td>
-                <td>" . $employee['ContactInfo'] . "</td>
-                <td>" . $employee['Address'] . "</td>
-                <td>" . $employee['DepartmentName'] . "</td>
-                <td>" . $employee['JobRoleName'] . "</td>
-                <td>" . $employee['BasicSalary'] . "</td>
-                <td>" . $employee['Allowances'] . "</td>
-                <td>" . $employee['BankName'] . "</td>
-                <td>" . $employee['AccountNumber'] . "</td>
-                <td>" . $employee['LeaveType'] . "</td>
-                <td>" . $employee['LeaveStartDate'] . "</td>
-                <td>" . $employee['LeaveEndDate'] . "</td>
-                <td>" . $employee['Status'] . "</td>
-              </tr>";
+        echo "</table>";
+    } else {
+        echo "<p>No employees found.</p>";
     }
-    echo "</table>";
-} else {
-    echo "<p>No employees found.</p>";
-}
 
-// Close connection
-$conn->close();
-?>
+} catch (PDOException $e) {
+    echo "<h3>Error fetching employees</h3>";
+    echo $e->getMessage();
+}
