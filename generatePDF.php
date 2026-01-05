@@ -1,106 +1,97 @@
 <?php
 require 'dompdf-3.0.1/dompdf/autoload.inc.php';
-
 use Dompdf\Dompdf;
 
-// Database connection
 require_once "db.php";
 
-// Check connection
-
-// Query to fetch all employee data along with department, bank details, and more
+// Fetch all employee data
 $sql = "
     SELECT 
-        E.EmployeeID, E.FirstName, E.LastName, E.Gender, E.Birthdate, E.ContactInfo, E.Address,
-        D.DepartmentName, 
-        J.JobRoleName, 
-        S.BasicSalary, S.Allowances, 
-        B.BankName, B.AccountNumber,
-        L.LeaveType, L.LeaveStartDate, L.LeaveEndDate, L.Status
-    FROM 
-        Employee E
-    LEFT JOIN 
-        EmployeeDepartment ED ON E.EmployeeID = ED.EmployeeID
-    LEFT JOIN 
-        Department D ON ED.DepartmentID = D.DepartmentID
-    LEFT JOIN 
-        EmployeeJobRole EJ ON E.EmployeeID = EJ.EmployeeID
-    LEFT JOIN 
-        JobRole J ON EJ.JobRoleID = J.JobRoleID
-    LEFT JOIN 
-        Salary S ON E.EmployeeID = S.EmployeeID
-    LEFT JOIN 
-        BankDetails B ON E.EmployeeID = B.EmployeeID
-    LEFT JOIN 
-        LeaveManagement L ON E.EmployeeID = L.EmployeeID
+        e.employeeid,
+        e.firstname,
+        e.lastname,
+        e.gender,
+        e.birthdate,
+        e.contactinfo,
+        e.address,
+        d.departmentname,
+        j.jobrolename,
+        s.basicsalary,
+        s.allowances,
+        b.bankname,
+        b.accountnumber,
+        l.leavetype,
+        l.leavestartdate,
+        l.leaveenddate,
+        l.status
+    FROM employee e
+    LEFT JOIN employeedepartment ed ON e.employeeid = ed.employeeid
+    LEFT JOIN department d ON ed.departmentid = d.departmentid
+    LEFT JOIN employeejobrole ej ON e.employeeid = ej.employeeid
+    LEFT JOIN jobrole j ON ej.jobroleid = j.jobroleid
+    LEFT JOIN salary s ON e.employeeid = s.employeeid
+    LEFT JOIN bankdetails b ON e.employeeid = b.employeeid
+    LEFT JOIN leavemanagement l ON e.employeeid = l.employeeid
 ";
 
-$result = $conn->query($sql);
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$employees = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$html = '<h2>All Employee Details:</h2>';
-$html .= '<table border="1">
-            <tr>
-                <th>Employee ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Gender</th>
-                <th>Birthdate</th>
-                <th>Contact Info</th>
-                <th>Address</th>
-                <th>Department</th>
-                <th>Job Role</th>
-                <th>Basic Salary</th>
-                <th>Allowances</th>
-                <th>Bank Name</th>
-                <th>Account Number</th>
-                <th>Leave Type</th>
-                <th>Leave Start Date</th>
-                <th>Leave End Date</th>
-                <th>Leave Status</th>
-            </tr>';
+// Build HTML
+$html = '<h2>All Employee Details</h2>';
+$html .= '<table border="1" width="100%" cellspacing="0" cellpadding="5">
+<tr>
+    <th>Employee ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Gender</th>
+    <th>Birthdate</th>
+    <th>Contact Info</th>
+    <th>Address</th>
+    <th>Department</th>
+    <th>Job Role</th>
+    <th>Basic Salary</th>
+    <th>Allowances</th>
+    <th>Bank Name</th>
+    <th>Account Number</th>
+    <th>Leave Type</th>
+    <th>Leave Start</th>
+    <th>Leave End</th>
+    <th>Status</th>
+</tr>';
 
-if ($result->num_rows > 0) {
-    while ($employee = $result->fetch_assoc()) {
-        $html .= '<tr>
-                    <td>' . $employee['EmployeeID'] . '</td>
-                    <td>' . $employee['FirstName'] . '</td>
-                    <td>' . $employee['LastName'] . '</td>
-                    <td>' . $employee['Gender'] . '</td>
-                    <td>' . $employee['Birthdate'] . '</td>
-                    <td>' . $employee['ContactInfo'] . '</td>
-                    <td>' . $employee['Address'] . '</td>
-                    <td>' . $employee['DepartmentName'] . '</td>
-                    <td>' . $employee['JobRoleName'] . '</td>
-                    <td>' . $employee['BasicSalary'] . '</td>
-                    <td>' . $employee['Allowances'] . '</td>
-                    <td>' . $employee['BankName'] . '</td>
-                    <td>' . $employee['AccountNumber'] . '</td>
-                    <td>' . $employee['LeaveType'] . '</td>
-                    <td>' . $employee['LeaveStartDate'] . '</td>
-                    <td>' . $employee['LeaveEndDate'] . '</td>
-                    <td>' . $employee['Status'] . '</td>
-                  </tr>';
+if (count($employees) > 0) {
+    foreach ($employees as $emp) {
+        $html .= "<tr>
+            <td>{$emp['employeeid']}</td>
+            <td>{$emp['firstname']}</td>
+            <td>{$emp['lastname']}</td>
+            <td>{$emp['gender']}</td>
+            <td>{$emp['birthdate']}</td>
+            <td>{$emp['contactinfo']}</td>
+            <td>{$emp['address']}</td>
+            <td>{$emp['departmentname']}</td>
+            <td>{$emp['jobrolename']}</td>
+            <td>{$emp['basicsalary']}</td>
+            <td>{$emp['allowances']}</td>
+            <td>{$emp['bankname']}</td>
+            <td>{$emp['accountnumber']}</td>
+            <td>{$emp['leavetype']}</td>
+            <td>{$emp['leavestartdate']}</td>
+            <td>{$emp['leaveenddate']}</td>
+            <td>{$emp['status']}</td>
+        </tr>";
     }
 } else {
-    $html .= '<tr><td colspan="17">No employees found.</td></tr>';
+    $html .= '<tr><td colspan="17">No employees found</td></tr>';
 }
 
 $html .= '</table>';
 
-// Create an instance of Dompdf
+// Generate PDF
 $dompdf = new Dompdf();
-
-// Load HTML content
 $dompdf->loadHtml($html);
-
-// Set paper size and orientation
 $dompdf->setPaper('A4', 'landscape');
-
-// Render the PDF
 $dompdf->render();
-
-// Output the generated PDF to browser
-$dompdf->stream('EmployeeDetails.pdf', array("Attachment" => 1));
-
-$conn->close();
-?>
+$dompdf->stream("EmployeeDetails.pdf", ["Attachment" => 1]);
