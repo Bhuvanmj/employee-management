@@ -4,10 +4,11 @@ require 'dompdf-3.0.1/dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 
 // Database connection
-$host = "localhost";
-$username = "root";
-$password = "navuhb";
-$database = "dbmsproject";
+$host     = getenv("DB_HOST");
+$username = getenv("DB_USER");
+$password = getenv("DB_PASS");
+$database = getenv("DB_NAME");
+
 
 $conn = new mysqli($host, $username, $password, $database);
 
